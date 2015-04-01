@@ -11,13 +11,17 @@ function LOGGER.log(str, ...)
 		return
 	end
 	local args = {...}
-	if #args ~= 0 then
+	if #args ~= 0 then --Category, put in master file + category files
 		for i = 1, #args do
 			local sub = args[i]
 			if not LOGGER.logfiles[sub] then
 				file.Write(LOGGER.logfile .. "-" .. sub .. ".txt", os.date() .. "\tBegan logging.")
 				LOGGER.logfiles[sub] = true
 			end
+			file.Append(LOGGER.logfile .. "-" .. sub .. ".txt", "\r\n" .. os.date() .. "\t" .. str)
+		end
+	else --No category, put in all logfiles
+		for sub in pairs(LOGGER.logfiles) do
 			file.Append(LOGGER.logfile .. "-" .. sub .. ".txt", "\r\n" .. os.date() .. "\t" .. str)
 		end
 	end
