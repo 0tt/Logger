@@ -14,6 +14,7 @@ function LOGGER.log(str, ...)
 	if #args ~= 0 then --Category, put in master file + category files
 		for i = 1, #args do
 			local sub = args[i]
+			sub = string.gsub(sub, "[\\/:*?\"<>|]", "_")
 			if not LOGGER.logfiles[sub] then
 				file.Write(LOGGER.logfile .. "-" .. sub .. ".txt", os.date() .. "\tBegan logging.")
 				LOGGER.logfiles[sub] = true
