@@ -48,4 +48,5 @@ for k, v in pairs(files) do
 		end
 	end
 end
-print("-LOG- Modules loaded. Logger initialization complete.\n")
+print("\t-LOG- Modules loaded.")
+print("-LOG- Logger initialization complete.\n")
